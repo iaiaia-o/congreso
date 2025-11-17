@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1er. Congreso Inteligencia Artificial & Quijote</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== ESTILOS GLOBALES Y VARIABLES ===== */
+        :root {
+            /* Colores inspirados en el PDF (oscuro, blanco y el acento dorado/naranja) */
+            --color-fondo-oscuro: #1a1a1a;
+            --color-fondo-claro: #f4f4f4;
+            --color-texto-oscuro: #333;
+            --color-texto-claro: #ffffff;
+            --color-acento: #e8a93a; /* Un tono dorado/naranja */
+
+            /* Tipografía */
+            --fuente-titulos: 'Playfair Display', serif; /* Clásica, Quijote */
+            --fuente-cuerpo: 'Lato', sans-serif; /* Moderna, IA */
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--fuente-cuerpo);
+            color: var(--color-texto-oscuro);
+            background-color: var(--color-fondo-claro);
+            line-height: 1.6;
+            /* Suaviza el desplazamiento al hacer clic en enlaces */
+            scroll-behavior: smooth; 
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--fuente-titulos);
+            font-weight: 700;
+            color: var(--color-acento);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        /* ===== SECCIÓN 1: HERO (CABECERA) ===== */
+        .hero {
+            position: relative; /* Necesario para el overlay */
+            height: 100vh; /* Ocupa toda la altura de la pantalla */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-texto-claro);
+            
+            /* * =============================================
+             * !! AQUÍ CAMBIAS LA IMAGEN DE FONDO !!
+             * Reemplaza la URL de abajo por la tuya.
+             * =============================================
+             */
+            background-image: url('portada-quijote-congreso-web.jpg');
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto parallax */
+        }
+
+        /* * AQUÍ VA LA TRANSPARENCIA (OVERLAY)
+         * Crea una capa oscura (60% opacidad) sobre la imagen, pero por debajo del texto.
+         */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1; /* Se pone debajo del contenido */
+        }
+
+        .hero-content {
+            position: relative; /* Se pone por encima del overlay */
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-titulo {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitulo {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--color-texto-claro); /* El subtítulo es blanco */
+            font-family: var(--fuente-cuerpo);
+        }
+
+        .hero-frase {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Botones de Llamada a la Acción (CTA) */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-acento);
+            color: var(--color-fondo-oscuro);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button-secundario {
+            display: inline-block;
+            background-color: transparent;
+            border: 2px solid var(--color-acento);
+            color: var(--color-acento);
+            padding: 10px 28px; /* Ligeramente más pequeño */
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button-secundario:hover {
+            background-color: var(--color-acento);
+            color: var(--color-fondo-oscuro);
+        }
+
+
+        /* ===== ESTILOS GENERALES DE SECCIONES ===== */
+        .section-dark, .section-cta {
+            background-color: var(--color-fondo-oscuro);
+            color: var(--color-texto-claro);
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background-color: var(--color-fondo-claro);
+            color: var(--color-texto-oscuro);
+            padding: 80px 0;
+        }
+
+        .section-dark h2, .section-cta h2 {
+            color: var(--color-acento);
+        }
+
+        .section-light h2 {
+            color: var(--color-texto-oscuro);
+        }
+
+        /* ===== SECCIÓN 2: MANIFIESTO ===== */
+        .manifiesto-texto {
+            font-size: 1.2rem;
+            font-family: var(--fuente-titulos);
+            font-style: italic;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* ===== SECCIÓN 3: OBJETIVOS (Layout 2 columnas) ===== */
+        .layout-dos-columnas {
+            display: flex;
+            flex-wrap: wrap; /* Para móviles */
+            align-items: center;
+            gap: 40px;
+        }
+
+        .columna-texto {
+            flex: 1; /* Ocupa el espacio disponible */
+            min-width: 300px; /* Para adaptabilidad */
+        }
+
+        .columna-imagen {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .columna-imagen img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .columna-texto ul {
+            list-style-type: '✔ '; /* Checkmark como viñeta */
+            padding-left: 20px;
+        }
+
+        /* ===== SECCIÓN 4: AGENDA ===== */
+        .agenda-lista {
+            list-style: none;
+            padding-left: 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .agenda-lista li {
+            font-size: 1.1rem;
+            padding: 15px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .agenda-lista .hora {
+            display: inline-block;
+            font-weight: 700;
+            color: var(--color-acento);
+            width: 60px; /* Alineación */
+        }
+
+        /* ===== SECCIÓN 5: PONENTES (Grid) ===== */
+        .ponentes-grid {
+            display: grid;
+            /* Crea columnas automáticas de 300px, responsive */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .ponente-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden; /* Para que la imagen se ajuste */
+        }
+
+        .ponente-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .ponente-card h3 {
+            margin-top: 20px;
+            color: var(--color-acento);
+        }
+
+        .ponente-card p {
+            padding: 0 20px 20px 20px;
+            color: var(--color-texto-oscuro);
+        }
+
+
+        /* ===== SECCIÓN 6: INSCRIPCIÓN (CTA) ===== */
+        .section-cta {
+            text-align: center;
+        }
+
+        .sintesis-final {
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* ===== FOOTER: ESPACIO DE LOGOS ===== */
+        #logos {
+            padding: 60px 0;
+            background-color: #e0e0e0; /* Un gris neutro claro */
+            text-align: center;
+        }
+
+        #logos h2 {
+            color: var(--color-texto-oscuro);
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Aquí pondrías el estilo para tus logos */
+        .logo-container img {
+            max-height: 60px; /* Ejemplo de altura máxima */
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            opacity: 1;
+        }
+    </style>
+    </head>
+<body>
+
+    <header class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="hero-titulo">1er. Congreso Inteligencia Artificial & Quijote</h1>
+            <h2 class="hero-subtitulo">Inteligencia Artificial para humanos y empresas "gigantes"</h2>
+            <p class="hero-frase">"Hay gigantes... y los reunimos para aprender"</p>
+<p class="hero-frase">El Toboso (Toledo), 23 de marzo de 2026 "</p>
+            <a href="#inscripcion" class="cta-button">Reserva tu Plaza</a>
+            <a href="#agenda" class="cta-button-secundario">Ver Programa</a>
+        </div>
+    </header>
+
+    <main>
+      <section id="manifiesto" class="section-dark">
+    <div class="container">
+        <h2>La Boda del Siglo XXI: El Quijote y la IA</h2>
+        
+        <p class="manifiesto-texto">
+            Después de cuatro siglos de ser un referente mundial en innovación disruptiva genial, Don Quijote regresa al siglo XXI para enseñar a empresas y líderes a pensar con Inteligencia Artificial de forma estratégica, con valores y con esencia humana.
+        </p>
+        
+        <p class="manifiesto-texto">
+            En un contexto dominado por el ruido tecnológico, este Congreso ofrece claridad, criterio y confianza. Una experiencia que muestra cómo aplicar la IA de forma inteligente, estratégica y humana.
+        </p>
+        </div>
+</section>
+
+        <section id="objetivos" class="section-light">
+            <div class="container layout-dos-columnas">
+                <div class="columna-texto">
+                    <h2>¿Por qué asistir?</h2>
+                    <p>El propósito es demostrar que la Inteligencia Artificial es una aliada estratégica. Dirigido a directivos, emprendedores, creativos y líderes de innovación que buscan:</p>
+                    <ul>
+                        <li>Comprender la IA sin tecnicismos ni promesas vacías.</li>
+                        <li>Ver casos reales que generen resultados.</li>
+                        <li>Descubrir cómo integrar tecnología y emoción.</li>
+                        <li>Activar su propia "inteligencia híbrida": la que une intuición y datos, alma y estrategia.</li>
+<li>"Hablar" directamente con el Quijote para generar ideas geniales a la medida.</li>
+                    </ul>
+                </div>
+                <div class="columna-imagen">
+                    <img src="congreso-casco-chip.jpg" alt="Casco de Quijote junto a un chip de IA">
+                </div>
+            </div>
+        </section>
+
+        <section id="agenda" class="section-dark">
+            <div class="container">
+                <h2>PROGRAMA</h2>
+                <p>El Quijote del siglo XXI no lucha contra molinos: entrena inteligencias. Su Dulcinea es la emoción humana que da sentido a los datos.El talento humano apoyado por las mejores herramientas estratégicas. Los nuevos líderes combinan bien ambos mundos.</p>
+                
+                <ul class="agenda-lista">
+                    <li><span class="hora">09:00</span> Performance de Apertura: "Visión, coraje y propósito".</li>
+                    <li><span class="hora">09:30</span> Ponencia Marco: "¿Cómo pueden arrancar las empresas con Inteligencia? José Manuel Casado. Presidente de Qaracter".</li>
+                    <li><span class="hora">10:30</span> Story-Lab: "Historia de la 'Boda': Presentación de la IA 'Quijote Day. Chema San Segundo. Escritor y experto en Innovación Disruptiva'".</li>
+                    <li><span class="hora">11:30</span> Coffee & Networking con Propósito.</li>
+                    <li><span class="hora">12:15</span> Track 1: Descubriendo a Dulcinea y la fuerza del talento humano. Ana de Andrés. Consultora Internacional</li>
+                    <li><span class="hora">14:00</span> Almuerzo.</li>
+                    <li><span class="hora">15:30</span> Talleres: El Escudo del Caballero.</li>
+<li><span class="hora">16:00</span> Talleres: Casos de éxito y soluciones para incorporar IA a toda la organización de forma coherente.</li>
+<li><span class="hora">17:30</span> Talleres: Frente a frente con la inteligencia que habla directamente con el Quijote y genera ieas y soluciones geniales y disruptivas.</li>
+                </ul>
+            </div>
+       
+                    
+                    </div>
+            </div>
+        </section>
+
+        <section id="inscripcion" class="section-cta">
+            <div class="container">
+                <h2>Únete a la Caballería del Conocimiento</h2>
+                <p class="sintesis-final">
+                    Un puente entre lo poético y lo práctico, entre la estrategia y el alma. La verdadera innovación no consiste en pensar más rápido, sino en pensar mejor.
+                </section>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="logos">
+        <div class="container">
+            <h2>Impulsan:</h2>
+            <div class="logo-container">
+                <p>(Espacio reservado para logos de impulsores y patrocinadores)</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
